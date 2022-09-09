@@ -52,8 +52,10 @@ func (s CoronaVirusStatistic) TableName() string {
 type (
 	//
 	Result struct {
-		Count  int            `json:"count"`
-		Detail []DetailResult `json:"detail"`
+		Count     int            `json:"count"`
+		BarChart  string         `json:"bar_chart"`
+		LineChart string         `json:"line_chart"`
+		Detail    []DetailResult `json:"detail"`
 	}
 
 	DetailResult struct {

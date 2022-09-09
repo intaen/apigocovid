@@ -14,8 +14,8 @@ func NewCovidHandler(r *gin.Engine, covidUsecase domain.CovidUsecase) {
 	handler := &CovidHandler{covidUsecase: covidUsecase}
 	g := r.Group("/covid")
 	g.GET("/list", handler.GetListData)
-	g.GET("/list/v2", handler.GetListDataBarChart)
-	g.GET("/list/v3", handler.GetListDataLineChart)
+	g.GET("/bar", handler.GetListDataBarChart)
+	g.GET("/line", handler.GetListDataLineChart)
 }
 
 // Get List Data godoc

@@ -9,6 +9,7 @@ import (
 	"github.com/go-echarts/go-echarts/v2/charts"
 	"github.com/intaen/apigocovid/domain"
 	"github.com/intaen/apigocovid/pkg/utils"
+	"github.com/spf13/viper"
 )
 
 type covidUsecase struct {
@@ -80,6 +81,8 @@ func (cv *covidUsecase) GetAllData() (*domain.Result, error) {
 	}
 
 	var result domain.Result
+	result.BarChart = viper.GetString("server.host")+":"+viper.GetString("server.address")+"/covid/bar"
+	result.LineChart = viper.GetString("server.host")+":"+viper.GetString("server.address")+"/covid/line"
 	result.Count = len(listData)
 	for _, v := range listData {
 
