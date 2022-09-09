@@ -73,7 +73,7 @@ func main() {
 
 	// Swagger
 	url := ginSwagger.URL(viper.GetString("server.host") + ":" + viper.GetString("server.address") + "/swagger/doc.json") // The url pointing to API definition
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url)) // http://localhost:9030/swagger/index.html
 
 	// Initiate Repository, Usecase, Handler
 	cRepo := cr.NewCovidRepository(psql)

@@ -1,0 +1,12 @@
+host: localhost:9030
+info:
+  contact:
+    email: intanmarsjaf@outlook.com
+    name: Developer
+  description: This page is API documentation to get data about Covid-19
+  title: GOCOVID
+  version: "1.0"
+paths: {}
+schemes:
+- http
+swagger: "2.0"
