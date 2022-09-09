@@ -1,0 +1,53 @@
+definitions:
+  domain.BadRequestResponse:
+    properties:
+      code:
+        example: "004"
+        type: string
+      message:
+        example: '[message]'
+        type: string
+      result:
+        example: "null"
+        type: string
+    type: object
+  domain.SuccessResponse:
+    properties:
+      code:
+        example: "000"
+        type: string
+      message:
+        example: '[message]'
+        type: string
+      result:
+        type: object
+    type: object
+host: localhost:9030
+info:
+  contact:
+    email: intanmarsjaf@outlook.com
+    name: Developer
+  description: This page is API documentation to get data about Covid-19
+  title: GOCOVID
+  version: "1.0"
+paths:
+  /covid/list:
+    get:
+      description: This is API to get list data of Covid-19
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.SuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/domain.BadRequestResponse'
+      summary: List Data of Covid
+      tags:
+      - Covid
+schemes:
+- http
+swagger: "2.0"

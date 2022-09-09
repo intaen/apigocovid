@@ -1,0 +1,79 @@
+{
+    "schemes": [
+        "http"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "description": "This page is API documentation to get data about Covid-19",
+        "title": "GOCOVID",
+        "contact": {
+            "name": "Developer",
+            "email": "intanmarsjaf@outlook.com"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:9030",
+    "paths": {
+        "/covid/list": {
+            "get": {
+                "description": "This is API to get list data of Covid-19",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Covid"
+                ],
+                "summary": "List Data of Covid",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domain.SuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/domain.BadRequestResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "domain.BadRequestResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "example": "004"
+                },
+                "message": {
+                    "type": "string",
+                    "example": "[message]"
+                },
+                "result": {
+                    "type": "string",
+                    "example": "null"
+                }
+            }
+        },
+        "domain.SuccessResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "example": "000"
+                },
+                "message": {
+                    "type": "string",
+                    "example": "[message]"
+                },
+                "result": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

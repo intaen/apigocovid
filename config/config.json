@@ -1,0 +1,18 @@
+{
+    "debug": true,
+    "server": {
+      "host": "http://localhost",
+      "address": "9030"
+    },
+    "database": {
+      "host": "localhost",
+      "user": "postgres",
+      "password":"admin",
+      "dbname":"postgres",
+      "port":5432
+    },
+    "url": {
+        "covid": "https://coronavirus.m.pipedream.net/"
+    }
+  }
+  
