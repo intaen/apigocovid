@@ -1,0 +1,18 @@
+{
+    "debug": true,
+    "server": {
+      "host": "",
+      "address": ""
+    },
+    "database": {
+      "host": "",
+      "user": "",
+      "password":"",
+      "dbname":"",
+      "port":""
+    },
+    "url": {
+        "covid": "https://coronavirus.m.pipedream.net/"
+    }
+  }
+  
