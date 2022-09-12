@@ -7,7 +7,6 @@ require (
 	github.com/gin-gonic/gin v1.7.7
 	github.com/go-echarts/go-echarts/v2 v2.2.4
 	github.com/go-openapi/swag v0.21.1 // indirect
-	github.com/go-redis/redis v6.15.9+incompatible // indirect
 	github.com/go-redis/redis/v8 v8.11.5
 	github.com/go-resty/resty/v2 v2.7.0
 	github.com/leodido/go-urn v1.2.1 // indirect
