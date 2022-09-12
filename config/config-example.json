@@ -11,6 +11,12 @@
       "dbname":"",
       "port":""
     },
+    "redis": {
+      "host": "",
+      "port":"",
+      "db": "",
+      "password":""
+    },
     "url": {
         "covid": "https://coronavirus.m.pipedream.net/"
     }

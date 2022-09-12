@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"log"
@@ -13,12 +14,13 @@ import (
 )
 
 type covidRepo struct {
+	rd domain.ClientRedis
 	db *gorm.DB
 }
 
 // NewCovidRepository will create an implementation of covid.Repository
-func NewCovidRepository(db *gorm.DB) domain.CovidRepository {
-	return &covidRepo{db: db}
+func NewCovidRepository(rd domain.ClientRedis, db *gorm.DB) domain.CovidRepository {
+	return &covidRepo{rd: rd, db: db}
 }
 
 // ---- API
@@ -62,7 +64,20 @@ func (cv *covidRepo) AddData(data []domain.CoronaVirusStatistic) error {
 
 func (cv *covidRepo) FindAllData() ([]domain.CoronaVirusStatistic, error) {
 	var data []domain.CoronaVirusStatistic
-	err := cv.db.Find(&data).Error
+
+	result, err := cv.rd.GetRedisValue("find_covids")
+	if err != nil {
+		fmt.Println("Database")
+		err := cv.db.Find(&data).Error
+		if err != nil {
+			return nil, err
+		}
+		cv.rd.SetRedisValue("find_covids", data, 300)
+		return data, nil
+	}
+
+	fmt.Println("Redis")
+	err = json.Unmarshal(result, &data)
 	if err != nil {
 		return nil, err
 	}

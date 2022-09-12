@@ -10,6 +10,7 @@ import (
 	cr "github.com/intaen/apigocovid/covid/repository"
 	cu "github.com/intaen/apigocovid/covid/usecase"
 	"github.com/intaen/apigocovid/pkg/db/postgres"
+	"github.com/intaen/apigocovid/pkg/db/redis"
 	"github.com/intaen/apigocovid/pkg/scheduler"
 
 	// mw "github.com/intaen/apigocovid/middleware"
@@ -44,18 +45,27 @@ func init() {
 // @contact.email intanmarsjaf@outlook.com
 func main() {
 	// Init connection database
-	psql, err := postgres.Init()
+	psqlClient, err := postgres.NewSQLClient()
 	if err != nil {
 		log.Fatalf("Postgresql init: %s", err)
 	}
 
 	// Create connection pool
-	sql, err := postgres.ConnectionPool(psql)
+	sql, err := postgres.ConnectionPool(psqlClient)
 	if err != nil {
-		log.Fatalf("Connection pool: %s", err)
+		log.Fatalf("ConnectionPool: %s", err)
 	}
 	log.Println(fmt.Sprintf("Postgres connected, Status: %#v", sql.Stats()))
 	defer sql.Close()
+
+	// Init connection redis
+	rd := redis.NewRedisClient()
+	defer rd.Close()
+	log.Println("Redis connected", rd)
+
+	// Create client redis
+	var ctx *gin.Context
+	redisClient := redis.CreateClient(rd, ctx)
 
 	// Create router
 	r := gin.Default()
@@ -76,7 +86,7 @@ func main() {
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))                                             // http://localhost:9030/swagger/index.html
 
 	// Initiate Repository, Usecase, Handler
-	cRepo := cr.NewCovidRepository(psql)
+	cRepo := cr.NewCovidRepository(redisClient, psqlClient)
 	cUsecase := cu.NewCovidUsecase(cRepo)
 	ch.NewCovidHandler(r, cUsecase)
 
