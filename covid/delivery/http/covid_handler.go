@@ -1,6 +1,8 @@
 package http
 
 import (
+	"time"
+
 	"github.com/gin-gonic/gin"
 	"github.com/intaen/apigocovid/domain"
 )
@@ -146,15 +148,21 @@ func (cv *CovidHandler) GetDataBarChartByKey(c *gin.Context) {
 	// Prepare data
 	var countries []string
 	var confirmed, deaths []int
-	for _, v := range listData.Detail {
+	var date string
+	for i, v := range listData.Detail {
 		countries = append(countries, v.CombinedKey)
 		confirmed = append(confirmed, v.Confirmed)
 		deaths = append(deaths, v.Deaths)
+
+		if i == len(listData.Detail)-1 {
+			dt, _ := time.Parse("2006-01-02 15:04:05", v.DateUpdated)
+			date = dt.Format("Mon, 2 Jan 2006 15:04:05")
+		}
 	}
 
 	// Create bar chart
-	confirmedBarChart := cv.chartUsecase.CreateBarChart(confirmed, countries, "GO COVID", "This is list of data confirmed covid in the world", "Confirmed")
-	deathBarChart := cv.chartUsecase.CreateBarChart(deaths, countries, "", "This is list of data deaths covid in the world", "Deaths")
+	confirmedBarChart := cv.chartUsecase.CreateBarChart(confirmed, countries, "Last Updated: "+date, "This is list of data confirmed covid in "+key, "Confirmed")
+	deathBarChart := cv.chartUsecase.CreateBarChart(deaths, countries, "", "This is list of data deaths covid in "+key, "Deaths")
 
 	// Show single chart in page
 	confirmedBarChart.Render(c.Writer)

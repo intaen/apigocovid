@@ -20,6 +20,7 @@ func GenerateBarChart(chartz domain.Chart) *charts.Bar {
 	bar := charts.NewBar()
 	// set some global options like Title/Legend/ToolTip or anything else
 	bar.SetGlobalOptions(
+		charts.WithInitializationOpts(opts.Initialization{Theme: types.ThemeInfographic}),
 		charts.WithTooltipOpts(opts.Tooltip{Show: true}),
 		charts.WithTitleOpts(opts.Title{
 			Title:    chartz.Title,

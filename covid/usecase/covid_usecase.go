@@ -121,6 +121,7 @@ func (cv *covidUsecase) GetDataByKey(key string) (*domain.Result, error) {
 			Confirmed:   v.Confirmed,
 			Deaths:      v.Deaths,
 			Recovered:   v.Recovered,
+			DateUpdated: v.DateUpdated,
 		}
 		result.Detail = append(result.Detail, detailResult)
 	}
