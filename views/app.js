@@ -1,5 +1,5 @@
 function getStatisticInBar() {
-    fetch('/covid/bar', {
+    fetch('/chart/example/bar', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'

@@ -84,3 +84,26 @@ func (cv *covidRepo) FindAllData() ([]domain.CoronaVirusStatistic, error) {
 
 	return data, nil
 }
+
+func (cv *covidRepo) FindDataByKey(key string) ([]domain.CoronaVirusStatistic, error) {
+	var data []domain.CoronaVirusStatistic
+
+	result, err := cv.rd.GetRedisValue("find_covids_by_" + key)
+	if err != nil {
+		fmt.Println("Database")
+		err := cv.db.Where("combined_key ILIKE $1", "%"+key+"%").Find(&data).Error
+		if err != nil {
+			return nil, err
+		}
+		cv.rd.SetRedisValue("find_covids_by_"+key, data, 300)
+		return data, nil
+	}
+
+	fmt.Println("Redis")
+	err = json.Unmarshal(result, &data)
+	if err != nil {
+		return nil, err
+	}
+
+	return data, nil
+}

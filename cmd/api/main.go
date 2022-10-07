@@ -6,9 +6,12 @@ import (
 	"net/http"
 	"time"
 
-	ch "github.com/intaen/apigocovid/covid/delivery/http"
-	cr "github.com/intaen/apigocovid/covid/repository"
-	cu "github.com/intaen/apigocovid/covid/usecase"
+	chh "github.com/intaen/apigocovid/chart/delivery/http"
+	chr "github.com/intaen/apigocovid/chart/repository"
+	chu "github.com/intaen/apigocovid/chart/usecase"
+	cvh "github.com/intaen/apigocovid/covid/delivery/http"
+	cvr "github.com/intaen/apigocovid/covid/repository"
+	cvu "github.com/intaen/apigocovid/covid/usecase"
 	"github.com/intaen/apigocovid/pkg/db/postgres"
 	"github.com/intaen/apigocovid/pkg/db/redis"
 	"github.com/intaen/apigocovid/pkg/scheduler"
@@ -87,13 +90,20 @@ func main() {
 	url := ginSwagger.URL(viper.GetString("server.host") + ":" + viper.GetString("server.address") + "/swagger/doc.json") // The url pointing to API definition
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))                                             // http://localhost:9030/swagger/index.html
 
-	// Initiate Repository, Usecase, Handler
-	cRepo := cr.NewCovidRepository(redisClient, psqlClient)
-	cUsecase := cu.NewCovidUsecase(cRepo)
-	ch.NewCovidHandler(r, cUsecase)
+	// Initiate Repository
+	chRepo := chr.NewChartRepository(redisClient, psqlClient)
+	cvRepo := cvr.NewCovidRepository(redisClient, psqlClient)
+
+	// Initiate Usecase
+	chUsecase := chu.NewChartUsecase(chRepo)
+	cvUsecase := cvu.NewCovidUsecase(cvRepo)
+
+	// Initiate Handler
+	chh.NewChartHandler(r, chUsecase)
+	cvh.NewCovidHandler(r, chUsecase, cvUsecase)
 
 	// Start Scheduler
-	scheduler.StartScheduler(cUsecase)
+	scheduler.StartScheduler(cvUsecase)
 
 	// Setting timeout
 	nHandler := http.TimeoutHandler(handler, 20*time.Second, "Timeout!")

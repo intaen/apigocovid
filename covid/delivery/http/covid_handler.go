@@ -6,14 +6,16 @@ import (
 )
 
 type CovidHandler struct {
+	chartUsecase domain.ChartUsecase
 	covidUsecase domain.CovidUsecase
 }
 
 // NewCovidHandlers Comments handlers constructor
-func NewCovidHandler(r *gin.Engine, covidUsecase domain.CovidUsecase) {
-	handler := &CovidHandler{covidUsecase: covidUsecase}
+func NewCovidHandler(r *gin.Engine, chartUsecase domain.ChartUsecase, covidUsecase domain.CovidUsecase) {
+	handler := &CovidHandler{chartUsecase: chartUsecase, covidUsecase: covidUsecase}
 	g := r.Group("/covid")
-	g.GET("/list", handler.GetListData)
+	g.GET("/all", handler.GetListData)
+	g.GET("/list", handler.GetDataByKey)
 	g.GET("/bar", handler.GetListDataBarChart)
 	g.GET("/line", handler.GetListDataLineChart)
 }
@@ -25,7 +27,7 @@ func NewCovidHandler(r *gin.Engine, covidUsecase domain.CovidUsecase) {
 // @Produce json
 // @Success 200 {object} domain.SuccessResponse
 // @Failure 400 {object} domain.BadRequestResponse
-// @Router /covid/list [get]
+// @Router /covid/all [get]
 func (cv *CovidHandler) GetListData(c *gin.Context) {
 	listData, err := cv.covidUsecase.GetAllData()
 	if err != nil {
@@ -38,6 +40,34 @@ func (cv *CovidHandler) GetListData(c *gin.Context) {
 	}
 
 	if len(listData.Detail) == 0 {
+		c.JSON(404, gin.H{
+			"code":    "001",
+			"message": "Data Not Found",
+			"result":  nil,
+		})
+		return
+	}
+
+	c.JSON(200, gin.H{
+		"code":    "000",
+		"message": "Data Found",
+		"result":  listData,
+	})
+}
+
+// Get Data By Key godoc
+// @Tags Covid
+// @Summary List Data of Covid
+// @Description This is API to get list data of Covid-19 by its country
+// @Produce json
+// @Success 200 {object} domain.SuccessResponse
+// @Failure 400 {object} domain.BadRequestResponse
+// @Router /covid/list?country [get]
+func (cv *CovidHandler) GetDataByKey(c *gin.Context) {
+	key := c.Query("country")
+
+	listData, err := cv.covidUsecase.GetDataByKey(key)
+	if err != nil {
 		c.JSON(404, gin.H{
 			"code":    "001",
 			"message": "Data Not Found",
@@ -82,8 +112,8 @@ func (cv *CovidHandler) GetListDataBarChart(c *gin.Context) {
 	}
 
 	// Create bar chart
-	confirmedBarChart := cv.covidUsecase.CreateBarChart(confirmed, countries, "GO COVID", "This is list of data confirmed covid in the world", "Confirmed")
-	deathBarChart := cv.covidUsecase.CreateBarChart(deaths, countries, "", "This is list of data deaths covid in the world", "Deaths")
+	confirmedBarChart := cv.chartUsecase.CreateBarChart(confirmed, countries, "GO COVID", "This is list of data confirmed covid in the world", "Confirmed")
+	deathBarChart := cv.chartUsecase.CreateBarChart(deaths, countries, "", "This is list of data deaths covid in the world", "Deaths")
 
 	// Show single chart in page
 	confirmedBarChart.Render(c.Writer)
@@ -119,8 +149,8 @@ func (cv *CovidHandler) GetListDataLineChart(c *gin.Context) {
 	}
 
 	// Create line chart
-	confirmedLineChart := cv.covidUsecase.CreateLineChart(confirmed, countries, "GO COVID", "This is list of data confirmed covid in the world", "Confirmed")
-	deathLineChart := cv.covidUsecase.CreateLineChart(deaths, countries, "", "This is list of data deaths covid in the world", "Deaths")
+	confirmedLineChart := cv.chartUsecase.CreateLineChart(confirmed, countries, "GO COVID", "This is list of data confirmed covid in the world", "Confirmed")
+	deathLineChart := cv.chartUsecase.CreateLineChart(deaths, countries, "", "This is list of data deaths covid in the world", "Deaths")
 
 	// Show single chart
 	confirmedLineChart.Render(c.Writer)

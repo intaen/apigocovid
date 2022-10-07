@@ -2,8 +2,6 @@ package domain
 
 import (
 	"time"
-
-	"github.com/go-echarts/go-echarts/v2/charts"
 )
 
 // Usecase represent the covid's usecases
@@ -13,10 +11,7 @@ type CovidUsecase interface {
 
 	// API
 	GetAllData() (*Result, error)
-
-	// Data
-	CreateBarChart([]int, []string, string, string, string) *charts.Bar
-	CreateLineChart([]int, []string, string, string, string) *charts.Line
+	GetDataByKey(string) (*Result, error)
 }
 
 // Repository represent the covid's repository contract
@@ -27,6 +22,7 @@ type CovidRepository interface {
 	// Database
 	AddData([]CoronaVirusStatistic) error
 	FindAllData() ([]CoronaVirusStatistic, error)
+	FindDataByKey(string) ([]CoronaVirusStatistic, error)
 }
 
 // Hero represent model

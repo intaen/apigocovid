@@ -6,9 +6,7 @@ import (
 	"sort"
 	"strconv"
 
-	"github.com/go-echarts/go-echarts/v2/charts"
 	"github.com/intaen/apigocovid/domain"
-	"github.com/intaen/apigocovid/pkg/utils"
 	"github.com/spf13/viper"
 )
 
@@ -81,11 +79,10 @@ func (cv *covidUsecase) GetAllData() (*domain.Result, error) {
 	}
 
 	var result domain.Result
-	result.BarChart = viper.GetString("server.host")+":"+viper.GetString("server.address")+"/covid/bar"
-	result.LineChart = viper.GetString("server.host")+":"+viper.GetString("server.address")+"/covid/line"
+	result.BarChart = viper.GetString("server.host") + ":" + viper.GetString("server.address") + "/covid/bar"
+	result.LineChart = viper.GetString("server.host") + ":" + viper.GetString("server.address") + "/covid/line"
 	result.Count = len(listData)
 	for _, v := range listData {
-
 		// For json
 		detailResult := domain.DetailResult{
 			Country:     v.Country,
@@ -106,34 +103,33 @@ func (cv *covidUsecase) GetAllData() (*domain.Result, error) {
 	return &result, nil
 }
 
-// ---- Data
+func (cv *covidUsecase) GetDataByKey(key string) (*domain.Result, error) {
+	listData, err := cv.covidRepo.FindDataByKey(key)
+	if err != nil {
+		return nil, err
+	}
 
-func (cv *covidUsecase) CreateBarChart(items []int, values []string, title, subtitle, seriesname string) *charts.Bar {
-	// Get total data
-	totalItem := utils.GetTotalBarItems(items)
+	var result domain.Result
+	result.BarChart = viper.GetString("server.host") + ":" + viper.GetString("server.address") + "/covid/bar"
+	result.LineChart = viper.GetString("server.host") + ":" + viper.GetString("server.address") + "/covid/line"
+	result.Count = len(listData)
+	for _, v := range listData {
+		// For json
+		detailResult := domain.DetailResult{
+			Country:     v.Country,
+			CombinedKey: v.CombinedKey,
+			Active:      v.Active,
+			Confirmed:   v.Confirmed,
+			Deaths:      v.Deaths,
+			Recovered:   v.Recovered,
+		}
+		result.Detail = append(result.Detail, detailResult)
+	}
 
-	// Assign it to struct of chart
-	var chart domain.Chart
-	chart.Title = title
-	chart.Subtitle = subtitle
-	chart.AxisX = values
-	chart.Series.Name = seriesname
-	chart.Series.DataBar = totalItem
+	// Sort by country name
+	sort.SliceStable(result.Detail, func(i, j int) bool {
+		return result.Detail[i].Country < result.Detail[j].Country
+	})
 
-	return utils.GenerateBarChart(chart)
-}
-
-func (cv *covidUsecase) CreateLineChart(items []int, values []string, title, subtitle, seriesname string) *charts.Line {
-	// Get total data
-	totalItem := utils.GetTotalLineItems(items)
-
-	// Assign it to struct of chart
-	var chart domain.Chart
-	chart.Title = title
-	chart.Subtitle = subtitle
-	chart.AxisX = values
-	chart.Series.Name = seriesname
-	chart.Series.DataLine = totalItem
-
-	return utils.GenerateLineChart(chart)
+	return &result, nil
 }
