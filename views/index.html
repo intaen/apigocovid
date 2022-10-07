@@ -1,0 +1,27 @@
+<html lang="en">
+  <head>
+    <title>GoCoVid</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css"/>
+    <script src="app.js"></script>
+  </head>
+  <body>
+    <div class="title">
+      <h1>Covid-19 in Chart</h1>
+    </div>
+
+    <h2>Statistic 2022</h2>
+    <div class="statistic">
+      <p align="center"><iframe id="chart" type="text/html" width="1000" height="405" src="" frameborder="0" allowfullscreen></iframe></p>
+      <script type="text/javascript">
+        document.getElementById("chart").src = getStatisticInBar();
+      </script>
+    </div>
+
+    <footer>
+      <p>intanmarsjaf©2022 · <a href="https://github.com/intaen">Github</a></p>
+    </footer>
+  </body>
+</html>

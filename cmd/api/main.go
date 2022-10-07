@@ -19,6 +19,7 @@ import (
 
 	_ "github.com/intaen/apigocovid/docs"
 
+	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 	"github.com/rs/cors"
 	"github.com/spf13/viper"
@@ -72,6 +73,7 @@ func main() {
 	// r.Use(mw.RequestLoggerMiddleware())
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
+	r.Use(static.Serve("/", static.LocalFile("./views", true)))
 	// r.Use(static.Serve("/", static.LocalFile("./html", true)))
 	handler := cors.Default().Handler(r)
 

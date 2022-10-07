@@ -4,6 +4,7 @@ go 1.15
 
 require (
 	github.com/gin-contrib/requestid v0.0.3
+	github.com/gin-gonic/contrib v0.0.0-20201101042839-6a891bf89f19 // indirect
 	github.com/gin-gonic/gin v1.7.7
 	github.com/go-echarts/go-echarts/v2 v2.2.4
 	github.com/go-openapi/swag v0.21.1 // indirect
