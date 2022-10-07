@@ -13,14 +13,12 @@
   <body>
     <div class="title">
       <h1>Covid-19 in Chart</h1>
-    </div>
+      <body onload="searchStatisticInBarDefault()">
 
-    <body onload="searchStatisticInBarDefault()">
-
-    <form class="find" onsubmit="searchStatisticInBar(event)" style="margin:auto;max-width:525px">
-      <input type="text" placeholder="Search by country or city (Japan, Tokyo, etc.)" id="search" value="Japan">
-    <button type="submit"><i class="fa fa-search"></i></button>
-    </form>
+      <form class="find" onsubmit="searchStatisticInBar(event)" style="margin:auto;max-width:525px">
+        <input type="text" placeholder="Search by country or city (Japan, Tokyo, etc.)" id="search" value="Japan">
+      <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
     </div>
 
     <div class="statistic">

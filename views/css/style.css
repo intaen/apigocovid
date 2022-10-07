@@ -1,97 +1,81 @@
 body {
   background-color: white;
-  text-align:center;
+  text-align: center;
 }
 
 .title {
-    border: 2px solid rgb(139, 233, 139);
-    border-radius: 25px;
-    margin: 15px;
-    padding: 15px;
-    background-color:rgb(139, 233, 139);
-    color: white;
-  }
+  border: 2px solid #c1232b;
+  border-radius: 25px;
+  margin: 15px;
+  padding: 15px;
+  background-color: #c1232b;
+  color: white;
+}
 
-  h1 {
-    color: rgb(80, 141, 80);
-    text-align: center;
-  }
+h1 {
+  color: white;
+  text-align: center;
+}
 
-  h2 {
-    text-align: center;
-  }
+.statistic {
+  text-align: center;
+  position: relative;
+  display: block;
+}
 
-  h3 {
-      color: black;
-      text-align: center;
-  }
+* {
+  box-sizing: border-box;
+  border-radius: 25px;
+}
 
-  h4 {
-    color: black;
-    text-align: center;
-    margin-bottom: 10px;
-  }
+form.find input[type="text"] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
 
-    .statistic {
-      text-align: center;
-      position: relative;
-      display:block;
-    }
+form.find button {
+  float: left;
+  width: 15%;
+  margin-left: 10px;
+  padding: 10px;
+  background: #3f656f;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
 
-    * {
-      box-sizing: border-box;
-      border-radius: 25px;
-    }
+form.find button:hover {
+  background: #75b9cc;
+}
 
-    form.find input[type=text] {
-      padding: 10px;
-      font-size: 17px;
-      border: 1px solid grey;
-      float: left;
-      width: 80%;
-      background: #f1f1f1;
-    }
-    
-    form.find button {
-      float: left;
-      width: 15%;
-      margin-left: 10px;
-      padding: 10px;
-      background: rgb(80, 141, 80);
-      color: white;
-      font-size: 17px;
-      border: 1px solid grey;
-      border-left: none;
-      cursor: pointer;
-    }
-    
-    form.find button:hover {
-      background: rgb(139, 233, 139);
-    }
-    
-    form.find::after {
-      content: "";
-      clear: both;
-      display: table;
-    }
+form.find::after {
+  content: "";
+  clear: both;
+  display: table;
+}
 
-    .left {
-      left: 0;
-      background-color: white;
-    }
-    
-    .right {
-      right: 0;
-      background-color: white;
-    }
-    
+.left {
+  left: 0;
+  background-color: white;
+}
 
-    footer {
-      text-align: center;
-      padding: 10px 10px 0px 10px;
-      width: 100%;
-      height: 40px;
-      bottom: 0;
-      position: fixed;
-      color: black;
-    }
+.right {
+  right: 0;
+  background-color: white;
+}
+
+footer {
+  text-align: center;
+  padding: 10px 10px 0px 10px;
+  width: 100%;
+  height: 50px;
+  bottom: 0;
+  position: fixed;
+  color: black;
+}
