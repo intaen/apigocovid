@@ -110,8 +110,7 @@ func (cv *covidUsecase) GetDataByKey(key string) (*domain.Result, error) {
 	}
 
 	var result domain.Result
-	result.BarChart = viper.GetString("server.host") + ":" + viper.GetString("server.address") + "/covid/bar"
-	result.LineChart = viper.GetString("server.host") + ":" + viper.GetString("server.address") + "/covid/line"
+	result.BarChart = viper.GetString("server.host") + ":" + viper.GetString("server.address") + "/covid/search/bar?country"
 	result.Count = len(listData)
 	for _, v := range listData {
 		// For json

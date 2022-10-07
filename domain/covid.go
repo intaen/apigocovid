@@ -49,8 +49,8 @@ type (
 	//
 	Result struct {
 		Count     int            `json:"count"`
-		BarChart  string         `json:"bar_chart"`
-		LineChart string         `json:"line_chart"`
+		BarChart  string         `json:"bar_chart,omitempty"`
+		LineChart string         `json:"line_chart,omitempty"`
 		Detail    []DetailResult `json:"detail"`
 	}
 

@@ -1,9 +1,11 @@
 <html lang="en">
   <head>
-    <title>GoCoVid</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/style.css"/>
     <script src="app.js"></script>
   </head>
@@ -12,11 +14,18 @@
       <h1>Covid-19 in Chart</h1>
     </div>
 
-    <h2>Statistic 2022</h2>
+    <body onload="searchStatisticInBarDefault()">
+
+    <form class="find" onsubmit="searchStatisticInBar(event)" style="margin:auto;max-width:525px">
+      <input type="text" placeholder="Search by country or city (Japan, Tokyo, etc.)" id="search" value="Japan">
+    <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+    </div>
+
     <div class="statistic">
       <p align="center"><iframe id="chart" type="text/html" width="1000" height="405" src="" frameborder="0" allowfullscreen></iframe></p>
       <script type="text/javascript">
-        document.getElementById("chart").src = getStatisticInBar();
+        document.getElementById("chart").src = searchStatisticInBarDefault();
       </script>
     </div>
 

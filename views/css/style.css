@@ -1,21 +1,36 @@
 body {
-      background-color: rgb(255, 255, 255);
-    }
+  background-color: white;
+  text-align:center;
+}
 
-    .title {
-      margin: 20px;
-      padding: 20px;
+.title {
+    border: 2px solid rgb(139, 233, 139);
+    border-radius: 25px;
+    margin: 15px;
+    padding: 15px;
+    background-color:rgb(139, 233, 139);
+    color: white;
+  }
+
+  h1 {
+    color: rgb(80, 141, 80);
+    text-align: center;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  h3 {
       color: black;
-    }
-
-    h1 {
-      color: rgb(0, 0, 0);
       text-align: center;
-    }
+  }
 
-    h2 {
-      text-align: center;
-    }
+  h4 {
+    color: black;
+    text-align: center;
+    margin-bottom: 10px;
+  }
 
     .statistic {
       text-align: center;
@@ -23,9 +38,53 @@ body {
       display:block;
     }
 
-    .space {
-      margin: 20px;
+    * {
+      box-sizing: border-box;
+      border-radius: 25px;
     }
+
+    form.find input[type=text] {
+      padding: 10px;
+      font-size: 17px;
+      border: 1px solid grey;
+      float: left;
+      width: 80%;
+      background: #f1f1f1;
+    }
+    
+    form.find button {
+      float: left;
+      width: 15%;
+      margin-left: 10px;
+      padding: 10px;
+      background: rgb(80, 141, 80);
+      color: white;
+      font-size: 17px;
+      border: 1px solid grey;
+      border-left: none;
+      cursor: pointer;
+    }
+    
+    form.find button:hover {
+      background: rgb(139, 233, 139);
+    }
+    
+    form.find::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+
+    .left {
+      left: 0;
+      background-color: white;
+    }
+    
+    .right {
+      right: 0;
+      background-color: white;
+    }
+    
 
     footer {
       text-align: center;
