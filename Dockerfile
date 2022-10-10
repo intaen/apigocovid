@@ -23,10 +23,10 @@ COPY src/main.go .
 
 USER 0:0
 # Build the Go app
-WORKDIR /apigocovid/src
+WORKDIR /apigocovid/cmd/api
 RUN go build -ldflags '-linkmode=external' main.go
 
-RUN go build -o src/main .
+RUN go build -o api/main .
 RUN chmod -R 777 src/
 
 #second stage
@@ -39,5 +39,5 @@ ENV TZ=Asia/Jakarta
 COPY --from=builder /apigocovid .
 
 # Run the binary program produced by `go install`
-CMD ["./src/main"]
+CMD ["./cmd/api/main"]
 #EXPOSE 9030 // Heroku will supply automatically
