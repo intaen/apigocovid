@@ -19,7 +19,7 @@ COPY . .
 RUN rm -rf pkg
 RUN rm -rf .git
 
-COPY src/main.go .
+COPY cmd/api/main.go .
 
 USER 0:0
 # Build the Go app
@@ -27,7 +27,7 @@ WORKDIR /apigocovid/cmd/api
 RUN go build -ldflags '-linkmode=external' main.go
 
 RUN go build -o api/main .
-RUN chmod -R 777 src/
+RUN chmod -R 777 cmd/
 
 #second stage
 FROM alpine AS final
