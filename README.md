@@ -4,4 +4,8 @@ Simple API to get data statistic updated about Covid-19 from all over the world.
 
 ## Documentation
 ```Swagger```
-http://{{hostname}}:{{port}}/swagger/index.html
+https://apigocovid.herokuapp.com/swagger/index.html
+
+## Deploy
+```Heroku```
+https://apigocovid.herokuapp.com
