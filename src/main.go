@@ -16,7 +16,7 @@ import (
 	"apigocovid/src/pkg/db/redis"
 	"apigocovid/src/pkg/scheduler"
 
-	// mw "apigocovid/src/middleware"
+	mw "apigocovid/src/middleware"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 
@@ -73,11 +73,10 @@ func main() {
 
 	// Create router
 	r := gin.Default()
-	// r.Use(mw.RequestLoggerMiddleware())
+	r.Use(mw.RequestLoggerMiddleware())
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
 	r.Use(static.Serve("/", static.LocalFile("./views", true)))
-	// r.Use(static.Serve("/", static.LocalFile("./html", true)))
 	handler := cors.Default().Handler(r)
 
 	// Handle wrong method
