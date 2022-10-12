@@ -23,11 +23,11 @@ COPY cmd/api/main.go .
 
 USER 0:0
 # Build the Go app
-WORKDIR /apigocovid/cmd/api
-#RUN go build -ldflags '-linkmode=external' main.go
+WORKDIR /apigocovid/
+#RUN go build -ldflags '-linkmode=external' cmd/api/main.go
 
-RUN go build -o api/main .
-RUN chmod -R 777 cmd/
+RUN go build -o cmd/api/main .
+RUN chmod -R 777 apigocovid/
 
 #second stage
 FROM alpine AS final
