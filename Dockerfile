@@ -24,7 +24,7 @@ COPY main.go .
 USER 0:0
 # Build the Go app
 WORKDIR /apigocovid/
-RUN go build -ldflags '-linkmode=external' main.go
+#RUN go build -ldflags '-linkmode=external' main.go
 
 RUN go build -o main .
 RUN chmod -R 777 cmd/
