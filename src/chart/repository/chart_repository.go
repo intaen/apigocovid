@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"apigocovid/domain"
+	"apigocovid/src/domain"
 
 	"gorm.io/gorm"
 )

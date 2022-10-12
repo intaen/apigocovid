@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"apigocovid/domain"
+	"apigocovid/src/domain"
 
 	_ "github.com/lib/pq"
 	"github.com/spf13/viper"

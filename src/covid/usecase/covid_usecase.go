@@ -6,7 +6,7 @@ import (
 	"sort"
 	"strconv"
 
-	"apigocovid/domain"
+	"apigocovid/src/domain"
 
 	"github.com/spf13/viper"
 )

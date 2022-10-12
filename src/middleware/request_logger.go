@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"apigocovid/pkg/utils"
+	"apigocovid/src/pkg/utils"
 
 	"github.com/gin-gonic/gin"
 )

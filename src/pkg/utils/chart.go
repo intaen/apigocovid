@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"apigocovid/domain"
+	"apigocovid/src/domain"
 
 	"github.com/go-echarts/go-echarts/v2/charts"
 	"github.com/go-echarts/go-echarts/v2/opts"

@@ -1,8 +1,8 @@
 package usecase
 
 import (
-	"apigocovid/domain"
-	"apigocovid/pkg/utils"
+	"apigocovid/src/domain"
+	"apigocovid/src/pkg/utils"
 
 	"github.com/go-echarts/go-echarts/v2/charts"
 )

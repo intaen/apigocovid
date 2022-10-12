@@ -1,7 +1,7 @@
 package http
 
 import (
-	"apigocovid/domain"
+	"apigocovid/src/domain"
 
 	"github.com/gin-gonic/gin"
 )

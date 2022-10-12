@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"time"
 
-	"apigocovid/domain"
-	"apigocovid/pkg/utils"
+	"apigocovid/src/domain"
+	"apigocovid/src/pkg/utils"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"

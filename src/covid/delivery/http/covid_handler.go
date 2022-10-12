@@ -3,7 +3,7 @@ package http
 import (
 	"time"
 
-	"apigocovid/domain"
+	"apigocovid/src/domain"
 
 	"github.com/gin-gonic/gin"
 )
