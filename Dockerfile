@@ -26,7 +26,7 @@ USER 0:0
 WORKDIR /apigocovid/
 #RUN go build -ldflags '-linkmode=external' cmd/api/main.go
 
-RUN go build -o cmd/api/main .
+RUN GO111MODULE=on  CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o cmd/api/main .
 RUN chmod -R 777 apigocovid/
 
 #second stage
