@@ -1,43 +1,26 @@
-FROM golang:alpine AS builder
-LABEL stage=builder
-# RUN apk add --no-cache gcc libc-dev tzdata
+# Builder
+FROM golang:1.14.2-alpine3.11 as builder
 
-RUN apk update && apk add --no-cache gcc libc-dev tcptraceroute busybox-extras curl
-ENV TZ=Asia/Jakarta
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ /etc/timezone
+RUN apk update && apk upgrade && \
+    apk --update add git make
 
-# Set the Current Working Directory inside the container
-WORKDIR /apigocovid/
-
-# We want to populate the module cache based on the go.{mod,sum} files.
-COPY go.mod go.sum ./
-
-RUN go mod download
+WORKDIR /cmd/api
 
 COPY . .
 
-RUN rm -rf pkg
-RUN rm -rf .git
+RUN make engine
 
-COPY cmd/api/main.go .
+# Distribution
+FROM alpine:latest
 
-USER 0:0
-# Build the Go app
-WORKDIR /apigocovid/
-RUN go build -ldflags '-linkmode=external' cmd/api/main.go
+RUN apk update && apk upgrade && \
+    apk --update --no-cache add tzdata && \
+    mkdir /cmd/api 
 
-RUN go build -o cmd/api/main .
-RUN chmod -R 777 cmd/
+WORKDIR /cmd/api 
 
-#second stage
-FROM alpine AS final
-# Install ca-certificates and libc6-compat for Go programs to work properly
-RUN apk add --no-cache ca-certificates libc6-compat
-RUN apk add --update tzdata
-ENV TZ=Asia/Jakarta
+EXPOSE 9030
 
-COPY --from=builder /apigocovid .
+COPY --from=builder /cmd/api/engine /cmd/api
 
-# Run the binary program produced by `go install`
-CMD ["./cmd/api/main"]
-#EXPOSE 9030 // Heroku will supply automatically
+CMD /cmd/api/engine
