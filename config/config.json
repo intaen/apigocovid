@@ -5,17 +5,17 @@
       "address": "9030"
     },
     "database": {
-      "host": "localhost",
-      "user": "postgres",
-      "password":"admin",
-      "dbname":"postgres",
+      "host": "ec2-44-207-133-100.compute-1.amazonaws.com",
+      "user": "bjfdaszsoeqdkg",
+      "password":"2e436bc65fe6712f80869b49142614df4bd81c204376a13a95d72fbd0fba247d",
+      "dbname":"d5oi9ps7591ldf",
       "port":5432
     },
     "redis": {
-      "host": "localhost",
-      "port":6379,
+      "host": "redis-11978.c246.us-east-1-4.ec2.cloud.redislabs.com",
+      "port":11978,
       "db": 0,
-      "password":""
+      "password":"ahLLtyfbby7eaDdjpTG4NiRiBkAruzf0"
     },
     "url": {
         "covid": "https://coronavirus.m.pipedream.net/"
