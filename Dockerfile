@@ -23,7 +23,7 @@ COPY cmd/api/main.go .
 
 USER 0:0
 # Build the Go app
-WORKDIR /apigocovid
+WORKDIR /apigocovid/
 RUN go build -ldflags '-linkmode=external' cmd/api/main.go
 
 RUN go build -o cmd/api/main .
