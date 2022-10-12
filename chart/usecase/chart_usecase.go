@@ -1,9 +1,10 @@
 package usecase
 
 import (
+	"apigocovid/domain"
+	"apigocovid/pkg/utils"
+
 	"github.com/go-echarts/go-echarts/v2/charts"
-	"github.com/intaen/apigocovid/domain"
-	"github.com/intaen/apigocovid/pkg/utils"
 )
 
 type chartUsecase struct {

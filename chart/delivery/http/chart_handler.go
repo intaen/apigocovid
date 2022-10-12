@@ -1,8 +1,9 @@
 package http
 
 import (
+	"apigocovid/domain"
+
 	"github.com/gin-gonic/gin"
-	"github.com/intaen/apigocovid/domain"
 )
 
 type ChartHandler struct {

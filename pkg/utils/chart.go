@@ -1,10 +1,11 @@
 package utils
 
 import (
+	"apigocovid/domain"
+
 	"github.com/go-echarts/go-echarts/v2/charts"
 	"github.com/go-echarts/go-echarts/v2/opts"
 	"github.com/go-echarts/go-echarts/v2/types"
-	"github.com/intaen/apigocovid/domain"
 )
 
 func GetTotalBarItems(list []int) []opts.BarData {

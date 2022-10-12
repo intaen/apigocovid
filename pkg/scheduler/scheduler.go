@@ -1,7 +1,8 @@
 package scheduler
 
 import (
-	"github.com/intaen/apigocovid/domain"
+	"apigocovid/domain"
+
 	"github.com/robfig/cron/v3"
 )
 

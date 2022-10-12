@@ -13,5 +13,215 @@
         "version": "1.0"
     },
     "host": "localhost:9030",
-    "paths": {}
+    "paths": {
+        "/chart/example": {
+            "get": {
+                "description": "This is API to get example of bar chart",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Example"
+                ],
+                "summary": "Example of Data in Bar Chart",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domain.SuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/domain.BadRequestResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/covid/bar": {
+            "get": {
+                "description": "This is API to get list data of Covid-19 in bar chart",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Covid"
+                ],
+                "summary": "List Data of Covid",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domain.SuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/domain.BadRequestResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/covid/line": {
+            "get": {
+                "description": "This is API to get list data of Covid-19 in line chart",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Covid"
+                ],
+                "summary": "List Data of Covid",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domain.SuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/domain.BadRequestResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/covid/list": {
+            "get": {
+                "description": "This is API to get list data of Covid-19",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Covid"
+                ],
+                "summary": "List Data of Covid",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domain.SuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/domain.BadRequestResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/covid/search": {
+            "get": {
+                "description": "This is API to get list data of Covid-19 by its country",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Covid"
+                ],
+                "summary": "List Data of Covid",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "QueryParam",
+                        "name": "country",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domain.SuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/domain.BadRequestResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/covid/search/bar": {
+            "get": {
+                "description": "This is API to get list data of Covid-19 by its country in Bar Chart",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Covid"
+                ],
+                "summary": "List Data of Covid",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "QueryParam",
+                        "name": "country",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domain.SuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/domain.BadRequestResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "domain.BadRequestResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "example": "004"
+                },
+                "message": {
+                    "type": "string",
+                    "example": "[message]"
+                },
+                "result": {
+                    "type": "string",
+                    "example": "null"
+                }
+            }
+        },
+        "domain.SuccessResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "example": "000"
+                },
+                "message": {
+                    "type": "string",
+                    "example": "[message]"
+                },
+                "result": {
+                    "type": "object"
+                }
+            }
+        }
+    }
 }

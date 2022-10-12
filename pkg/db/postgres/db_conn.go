@@ -5,7 +5,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/intaen/apigocovid/domain"
+	"apigocovid/domain"
+
 	_ "github.com/lib/pq"
 	"github.com/spf13/viper"
 	"gorm.io/driver/postgres"

@@ -4,8 +4,9 @@ import (
 	"fmt"
 	"log"
 
+	"apigocovid/pkg/utils"
+
 	"github.com/gin-gonic/gin"
-	"github.com/intaen/apigocovid/pkg/utils"
 )
 
 func RequestLoggerMiddleware() gin.HandlerFunc {

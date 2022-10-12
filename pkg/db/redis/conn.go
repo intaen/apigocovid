@@ -6,10 +6,11 @@ import (
 	"fmt"
 	"time"
 
+	"apigocovid/domain"
+	"apigocovid/pkg/utils"
+
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
-	"github.com/intaen/apigocovid/domain"
-	"github.com/intaen/apigocovid/pkg/utils"
 	"github.com/spf13/viper"
 )
 

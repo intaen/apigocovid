@@ -1,7 +1,8 @@
 package repository
 
 import (
-	"github.com/intaen/apigocovid/domain"
+	"apigocovid/domain"
+
 	"gorm.io/gorm"
 )
 

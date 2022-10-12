@@ -6,8 +6,9 @@ import (
 	"fmt"
 	"log"
 
+	"apigocovid/domain"
+
 	"github.com/go-resty/resty/v2"
-	"github.com/intaen/apigocovid/domain"
 	"github.com/spf13/viper"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"

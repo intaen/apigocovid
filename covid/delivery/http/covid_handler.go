@@ -3,8 +3,9 @@ package http
 import (
 	"time"
 
+	"apigocovid/domain"
+
 	"github.com/gin-gonic/gin"
-	"github.com/intaen/apigocovid/domain"
 )
 
 type CovidHandler struct {
@@ -63,10 +64,11 @@ func (cv *CovidHandler) GetListData(c *gin.Context) {
 // @Tags Covid
 // @Summary List Data of Covid
 // @Description This is API to get list data of Covid-19 by its country
+// @Param        country    query     string  true  "QueryParam"
 // @Produce json
 // @Success 200 {object} domain.SuccessResponse
 // @Failure 400 {object} domain.BadRequestResponse
-// @Router /covid/search?country [get]
+// @Router /covid/search [get]
 func (cv *CovidHandler) GetDataByKey(c *gin.Context) {
 	key := c.Query("country")
 
@@ -134,10 +136,11 @@ func (cv *CovidHandler) GetListDataBarChart(c *gin.Context) {
 // @Tags Covid
 // @Summary List Data of Covid
 // @Description This is API to get list data of Covid-19 by its country in Bar Chart
+// @Param        country    query     string  true  "QueryParam"
 // @Produce json
 // @Success 200 {object} domain.SuccessResponse
 // @Failure 400 {object} domain.BadRequestResponse
-// @Router /covid/search/bar?country [get]
+// @Router /covid/search/bar [get]
 func (cv *CovidHandler) GetDataBarChartByKey(c *gin.Context) {
 	key := c.Query("country")
 

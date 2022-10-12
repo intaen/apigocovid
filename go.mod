@@ -1,4 +1,4 @@
-module github.com/intaen/apigocovid
+module apigocovid
 
 go 1.15
 
