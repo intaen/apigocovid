@@ -21,7 +21,7 @@ const (
 )
 
 func NewSQLClient() (*gorm.DB, error) {
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Asia/Jakarta",
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=required TimeZone=Asia/Jakarta",
 		viper.GetString("database.host"),
 		viper.GetString("database.user"),
 		viper.GetString("database.password"),
