@@ -23,10 +23,10 @@ COPY cmd/api/main.go .
 
 USER 0:0
 # Build the Go app
-WORKDIR /apigocovid/
+WORKDIR /apigocovid/cmd/api
 #RUN go build -ldflags '-linkmode=external' cmd/api/main.go
 
-RUN GO111MODULE=on  CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o cmd/api/main .
+RUN go build -o cmd/api/main .
 RUN chmod -R 777 apigocovid/
 
 #second stage
